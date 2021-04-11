@@ -1,0 +1,32 @@
+{
+  "name": "weather-app",
+  "version": "1.0.0",
+  "description": "A simple weather app for The Odin Project",
+  "private": "true",
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "start": "webpack serve --open 'Google Chrome'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Atlas-1510/weather-app.git"
+  },
+  "author": "Jason Aravanis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Atlas-1510/weather-app/issues"
+  },
+  "homepage": "https://github.com/Atlas-1510/weather-app#readme",
+  "devDependencies": {
+    "css-loader": "^5.2.1",
+    "html-webpack-plugin": "^5.3.1",
+    "sass": "^1.32.8",
+    "sass-loader": "^11.0.1",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.31.2",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {}
+}
