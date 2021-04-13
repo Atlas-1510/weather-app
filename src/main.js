@@ -4,6 +4,11 @@ const openweathermap_key = "8d3007697e1595ff555d6df24f4492f3";
 const location = document.getElementById("location");
 const locationSubmit = document.getElementById("locationSubmit");
 const geolocation = document.getElementById("geolocation");
+const metricToggle = document.getElementById("metricUnitToggle");
+
+const Settings = {
+  weatherUnit: "metric",
+};
 
 async function getCoordinatesAPI(input) {
   // Uses nominatim API (https://nominatim.org) from OpenStreetMap to get latitude and longitude of user input
@@ -23,7 +28,7 @@ async function parseResponse(API_response) {
 async function getWeatherAPI(lat, lon) {
   // Uses OpenWeatherMap one-call API (https://openweathermap.org/api/one-call-api) to get weather information
   let API_response = await fetch(
-    `https://api.openweathermap.org/data/2.5/onecall?exclude=minutely&lat=${lat}&lon=${lon}&appid=${openweathermap_key}`,
+    `https://api.openweathermap.org/data/2.5/onecall?exclude=minutely&units=${Settings.weatherUnit}&lat=${lat}&lon=${lon}&appid=${openweathermap_key}`,
     { mode: "cors" }
   );
   return await parseResponse(API_response);
@@ -31,7 +36,6 @@ async function getWeatherAPI(lat, lon) {
 
 async function customWeatherSearch(searchInput) {
   let locationJSON = (await getCoordinatesAPI(searchInput))[0];
-  console.log(locationJSON);
   let weatherJSON = await getWeatherAPI(locationJSON.lat, locationJSON.lon);
   console.log(weatherJSON);
 }
@@ -56,3 +60,11 @@ locationSubmit.addEventListener("click", (event) => {
 });
 
 geolocation.addEventListener("click", currentLocationWeatherSearch);
+
+metricToggle.addEventListener("change", (e) => {
+  if (e.target.checked) {
+    Settings.weatherUnit = "metric";
+  } else {
+    Settings.weatherUnit = "imperial";
+  }
+});
