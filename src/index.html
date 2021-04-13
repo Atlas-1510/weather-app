@@ -7,26 +7,41 @@
     <title>This is My Template</title>
   </head>
   <body>
-    <h1>This is from the template</h1>
-    <form>
-      <label for="location"></label>
-      <input name="location" id="location" type="text" />
-      <input type="submit" id="locationSubmit" />
-      <label for="geolocation"></label>
-      <input
-        name="geolocation"
-        id="geolocation"
-        type="button"
-        value="Use Current Location"
-      />
-      <br />
-      <label for="metricUnitToggle">Metric units?</label>
-      <input
-        type="checkbox"
-        id="metricUnitToggle"
-        name="metricUnitToggle"
-        checked
-      />
-    </form>
+    <nav>
+      <form>
+        <h1>WeatherApp</h1>
+
+        <div>
+          <label for="location"></label>
+          <input name="location" id="location" type="text" />
+          <label for="locationSubmit"></label>
+          <input type="submit" id="locationSubmit" />
+          <label for="geolocation"></label>
+          <input
+            name="geolocation"
+            id="geolocation"
+            type="button"
+            value="Use CL"
+          />
+        </div>
+
+        <div>
+          <!-- <input type="button" value="Celsius" />
+          <input type="button" value="Fahrenheit" /> -->
+          <label for="metricUnitToggle">Metric units?</label>
+          <input
+            type="checkbox"
+            id="metricUnitToggle"
+            name="metricUnitToggle"
+            checked
+          />
+        </div>
+      </form>
+    </nav>
+    <main>
+      <div id="primaryWeather" class="bubble"></div>
+      <div id="secondaryWeather" class="bubble"></div>
+      <div id="tertiaryWeather" class="bubble"></div>
+    </main>
   </body>
 </html>
