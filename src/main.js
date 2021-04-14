@@ -5,14 +5,11 @@ const openweathermap_key = "8d3007697e1595ff555d6df24f4492f3";
 const location = document.getElementById("location");
 const locationSubmit = document.getElementById("locationSubmit");
 const geolocation = document.getElementById("geolocation");
-const toggleHolder = document.querySelector(".toggle-holder");
+// const toggleHolder = document.querySelector(".toggle-holder");
 
 const Settings = {
   weatherUnit: "metric",
 };
-
-const toggle = Toggle.generateToggle("metricUnitToggle");
-toggleHolder.appendChild(toggle);
 
 async function getCoordinatesAPI(input) {
   // Uses nominatim API (https://nominatim.org) from OpenStreetMap to get latitude and longitude of user input
@@ -66,12 +63,12 @@ locationSubmit.addEventListener("click", (event) => {
 
 geolocation.addEventListener("click", currentLocationWeatherSearch);
 
-toggleHolder.addEventListener("change", (e) => {
-  console.log("CHANGE");
-  if (e.target.checked) {
-    Settings.weatherUnit = "metric";
-  } else {
-    Settings.weatherUnit = "imperial";
-  }
-  console.log(Settings.weatherUnit);
-});
+// toggleHolder.addEventListener("change", (e) => {
+//   console.log("CHANGE");
+//   if (e.target.checked) {
+//     Settings.weatherUnit = "metric";
+//   } else {
+//     Settings.weatherUnit = "imperial";
+//   }
+//   console.log(Settings.weatherUnit);
+// });
