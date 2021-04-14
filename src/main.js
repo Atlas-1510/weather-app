@@ -73,4 +73,5 @@ toggleHolder.addEventListener("change", (e) => {
   } else {
     Settings.weatherUnit = "imperial";
   }
+  console.log(Settings.weatherUnit);
 });

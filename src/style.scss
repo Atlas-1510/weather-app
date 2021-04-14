@@ -3,7 +3,7 @@ $border-radius-default: 25px;
 $bubble-background-color: #e8f1f2;
 $button-color: #f48f66;
 $font-color-primary: #1d3557;
-$gap-size: 25px;
+$gap-size: 50px;
 
 body {
   background-image: url("./wallpaper.jpg");
@@ -32,16 +32,19 @@ nav {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    font-size: 1.5rem;
 
     h1 {
-      height: 23px;
+      font-size: 3rem;
+
+      margin: $margin-default;
     }
 
     #userControlContainer {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 23px;
+      height: 40px;
 
       #location {
         background-color: $bubble-background-color;
@@ -49,25 +52,27 @@ nav {
         border-radius: $border-radius-default;
         border: none;
         height: 100%;
-        width: 200px;
-        padding-left: 8px;
+        width: 300px;
+        padding-left: 1rem;
         margin: 0px 5px 0px 5px;
+        font-size: 1.5rem;
       }
 
       button {
-        width: 100%;
-        height: 100%;
+        height: inherit;
         flex: 1;
         border-radius: 5px;
         margin: 0px 5px 0px 5px;
-        padding: 3px 6px 3px 6px;
+        padding: 3px 12px 3px 12px;
         border: 0;
         display: flex;
         justify-content: center;
         align-items: center;
         background-color: $button-color;
         img {
-          // width: 100%;
+          width: 25px;
+          height: auto;
+          padding: 0;
           filter: invert(100%) sepia(0%) saturate(7451%) hue-rotate(136deg)
             brightness(112%) contrast(112%);
         }
