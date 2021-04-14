@@ -20,6 +20,7 @@
   "homepage": "https://github.com/Atlas-1510/weather-app#readme",
   "devDependencies": {
     "css-loader": "^5.2.1",
+    "html-loader": "^2.1.2",
     "html-webpack-plugin": "^5.3.1",
     "sass": "^1.32.8",
     "sass-loader": "^11.0.1",

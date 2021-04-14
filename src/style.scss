@@ -1,14 +1,20 @@
 $margin-default: 3%;
 $border-radius-default: 25px;
-$header-background-color: #013a63;
-$body-background-color: #a8dadc;
 $bubble-background-color: #e8f1f2;
-$bubble-text-color: #001a23;
+$button-color: #f48f66;
+$font-color-primary: #1d3557;
+$gap-size: 25px;
 
 body {
-  background-color: $body-background-color;
+  background-image: url("./wallpaper.jpg");
+  // Background image sourced from https://wallha.com/wallpaper/sky-blue-clouds-flowers-painting-663065
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
   margin: 0;
   padding: 0;
+  border: 0;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -18,34 +24,119 @@ body {
 
 nav {
   color: $bubble-background-color;
-  background-color: $header-background-color;
+  width: 100vw;
 
   form {
-    margin: 0% $margin-default 0% $margin-default;
+    width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
+
+    h1 {
+      height: 23px;
+    }
+
+    #userControlContainer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 23px;
+
+      #location {
+        background-color: $bubble-background-color;
+        color: $font-color-primary;
+        border-radius: $border-radius-default;
+        border: none;
+        height: 100%;
+        width: 200px;
+        padding-left: 8px;
+        margin: 0px 5px 0px 5px;
+      }
+
+      button {
+        width: 100%;
+        height: 100%;
+        flex: 1;
+        border-radius: 5px;
+        margin: 0px 5px 0px 5px;
+        padding: 3px 6px 3px 6px;
+        border: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $button-color;
+        img {
+          // width: 100%;
+          filter: invert(100%) sepia(0%) saturate(7451%) hue-rotate(136deg)
+            brightness(112%) contrast(112%);
+        }
+      }
+    }
+
+    .toggle {
+      $toggle-width: 40px;
+      $toggle-height: $toggle-width * 0.5;
+      $toggle-border-radius: $toggle-height * 0.5;
+      display: inline-block;
+      cursor: pointer;
+
+      .toggle-input {
+        display: none;
+      }
+
+      .toggle-input:checked ~ .toggle-fill {
+        background: rgb(20, 113, 225);
+      }
+
+      .toggle-input:checked ~ .toggle-fill::after {
+        transform: translateX($toggle-height);
+      }
+
+      .toggle-fill {
+        position: relative;
+        width: $toggle-width;
+        height: $toggle-height;
+        border-radius: $toggle-border-radius;
+        background-color: #dddddd;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .toggle-fill::after {
+        content: "";
+        position: absolute;
+        top: $toggle-height * 0.1;
+        left: $toggle-height * 0.1;
+        height: $toggle-height * 0.8;
+        width: $toggle-height * 0.8;
+        background-color: #ffffff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+        border-radius: $toggle-border-radius;
+        transition: transform 0.3s ease-in-out;
+      }
+    }
   }
 }
 
 main {
   margin: $margin-default;
+  margin-top: 0;
   flex: 1;
   display: grid;
-  grid-template-columns: [first] 1fr [second] 1fr [third] 1fr [fourth];
-  grid-template-rows: [first] 1fr [second] 1fr [third] 1fr [fourth];
+  grid-template-columns: [first] 1fr [second] $gap-size [third] 1fr [fourth] $gap-size [fifth] 1fr [sixth];
+  grid-template-rows: [first] 1fr [second] $gap-size [third] 1fr [fourth] $gap-size [fifth] 1fr [sixth];
   grid-template-areas:
-    "primary primary secondary"
-    "primary primary secondary"
-    "tertiary tertiary secondary";
-  gap: 5%;
+    "primary primary primary . secondary"
+    "primary primary primary . secondary"
+    "primary primary primary . secondary"
+    ". . . . secondary"
+    "tertiary tertiary tertiary.  secondary";
 
   .bubble {
     background-color: $bubble-background-color;
     border-radius: $border-radius-default;
-    color: $bubble-text-color;
     box-shadow: 4px 4px 8px;
+    opacity: 0.95;
   }
 
   #primaryWeather {

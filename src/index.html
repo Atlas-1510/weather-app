@@ -10,32 +10,29 @@
     <nav>
       <form>
         <h1>WeatherApp</h1>
-
-        <div>
+        <div id="userControlContainer">
           <label for="location"></label>
-          <input name="location" id="location" type="text" />
-          <label for="locationSubmit"></label>
-          <input type="submit" id="locationSubmit" />
-          <label for="geolocation"></label>
           <input
-            name="geolocation"
-            id="geolocation"
-            type="button"
-            value="Use CL"
+            name="location"
+            id="location"
+            type="text"
+            placeholder="Search..."
           />
+          <button id="locationSubmit"><img src="./search.svg" /></button>
+          <button id="geolocation">
+            <img src="./cursor.svg" />
+          </button>
         </div>
-
-        <div>
-          <!-- <input type="button" value="Celsius" />
-          <input type="button" value="Fahrenheit" /> -->
-          <label for="metricUnitToggle">Metric units?</label>
+        <label for="metricUnitToggle" class="toggle">
           <input
             type="checkbox"
             id="metricUnitToggle"
+            class="toggle-input"
             name="metricUnitToggle"
             checked
           />
-        </div>
+          <div class="toggle-fill"></div>
+        </label>
       </form>
     </nav>
     <main>
