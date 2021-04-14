@@ -1,14 +1,18 @@
 import "./style.scss";
+import * as Toggle from "./toggle/toggle";
 
 const openweathermap_key = "8d3007697e1595ff555d6df24f4492f3";
 const location = document.getElementById("location");
 const locationSubmit = document.getElementById("locationSubmit");
 const geolocation = document.getElementById("geolocation");
-const metricToggle = document.getElementById("metricUnitToggle");
+const toggleHolder = document.querySelector(".toggle-holder");
 
 const Settings = {
   weatherUnit: "metric",
 };
+
+const toggle = Toggle.generateToggle("metricUnitToggle");
+toggleHolder.appendChild(toggle);
 
 async function getCoordinatesAPI(input) {
   // Uses nominatim API (https://nominatim.org) from OpenStreetMap to get latitude and longitude of user input
@@ -40,7 +44,8 @@ async function customWeatherSearch(searchInput) {
   console.log(weatherJSON);
 }
 
-async function currentLocationWeatherSearch() {
+async function currentLocationWeatherSearch(e) {
+  e.preventDefault();
   function getLocalCoordinates() {
     return new Promise(function (resolve, reject) {
       navigator.geolocation.getCurrentPosition(resolve, reject);
@@ -61,7 +66,8 @@ locationSubmit.addEventListener("click", (event) => {
 
 geolocation.addEventListener("click", currentLocationWeatherSearch);
 
-metricToggle.addEventListener("change", (e) => {
+toggleHolder.addEventListener("change", (e) => {
+  console.log("CHANGE");
   if (e.target.checked) {
     Settings.weatherUnit = "metric";
   } else {

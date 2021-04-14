@@ -1,0 +1,41 @@
+.toggle {
+  $toggle-width: 40px;
+  $toggle-height: $toggle-width * 0.5;
+  $toggle-border-radius: $toggle-height * 0.5;
+  display: inline-block;
+  cursor: pointer;
+
+  .toggle-input {
+    display: none;
+  }
+
+  .toggle-input:checked ~ .toggle-fill {
+    background: rgb(20, 113, 225);
+  }
+
+  .toggle-input:checked ~ .toggle-fill::after {
+    transform: translateX($toggle-height);
+  }
+
+  .toggle-fill {
+    position: relative;
+    width: $toggle-width;
+    height: $toggle-height;
+    border-radius: $toggle-border-radius;
+    background-color: #dddddd;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .toggle-fill::after {
+    content: "";
+    position: absolute;
+    top: $toggle-height * 0.1;
+    left: $toggle-height * 0.1;
+    height: $toggle-height * 0.8;
+    width: $toggle-height * 0.8;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    border-radius: $toggle-border-radius;
+    transition: transform 0.3s ease-in-out;
+  }
+}
