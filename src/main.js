@@ -28,6 +28,7 @@ const searchInput = document.getElementById("searchInput");
 const searchSubmit = document.getElementById("searchSubmit");
 const geolocation = document.getElementById("geolocation");
 // Primary Tile
+const primaryTile = document.getElementById("primaryWeather");
 const locationTitle = document.getElementById("locationTitle");
 const weatherIcon = document.getElementById("weatherIcon");
 const temperature = document.getElementById("temperature");
@@ -35,6 +36,9 @@ const conditions = document.getElementById("conditions");
 const rain = document.getElementById("rain");
 const highLow = document.getElementById("highLow");
 const locationTime = document.getElementById("locationTime");
+// Secondary Tile
+const secondaryTile = document.getElementById("secondaryWeather");
+
 // const toggleHolder = document.querySelector(".toggle-holder");
 
 const Settings = {
@@ -69,12 +73,12 @@ const Main = (() => {
     } else {
       returnedWeather = await Weather.currentLocationWeatherSearch();
     }
-    console.log(returnedWeather.weather.timezone_offset);
     let localTime = Utilities.getLocalTime(returnedWeather.weather.timezone);
     returnedWeather.localTime = localTime;
 
     console.log(returnedWeather);
     Utilities.updatePrimaryTile(returnedWeather);
+    Utilities.updateSecondaryTile(returnedWeather);
   }
 
   return { updateWeather };
@@ -191,12 +195,67 @@ const Utilities = (() => {
       time: `${dateTime[2].value}:${dateTime[4].value} ${dateTime[6].value}`,
     };
 
-    console.log(dateTime);
-
     return dateTime;
   }
 
-  return { parseResponse, updatePrimaryTile, getLocalTime };
+  function updateSecondaryTile(tileInfo) {
+    const days = [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+    ];
+
+    const forecasts = [...secondaryTile.querySelectorAll(".dailyForecast")];
+
+    console.log(forecasts);
+
+    // Loop starts on 1 as first day (0) is in the primary tile
+    for (let i = 1; i < 7; i++) {
+      // Update day
+      let nextDay = days.indexOf(tileInfo.localTime.weekday) + i;
+
+      if (nextDay > 6) {
+        nextDay = nextDay % 7;
+      }
+      nextDay = days[nextDay];
+
+      let dayNode = forecasts[i - 1]
+        .querySelector(".forecast")
+        .querySelector(".day");
+      dayNode.textContent = nextDay;
+
+      // // Update icon
+      let icon = forecasts[i - 1].querySelector(".forecastIcon");
+      let icon_code = tileInfo.weather.daily[i].weather[0].icon;
+      icon.src = Settings.icons[icon_code];
+
+      // // Update Rain
+      let rain = forecasts[i - 1]
+        .querySelector(".forecast")
+        .querySelector(".forecast-rain");
+      let pop = tileInfo.weather.daily[i].pop * 100;
+      rain.textContent = `${pop}% chance of rain`;
+
+      // Update high / low
+      let highLow = forecasts[i - 1]
+        .querySelector(".forecast")
+        .querySelector(".forecast-highLow");
+      let high = Math.round(tileInfo.weather.daily[i].temp.max);
+      let low = Math.round(tileInfo.weather.daily[i].temp.min);
+      highLow.textContent = `${high}° / ${low}°`;
+    }
+  }
+
+  return {
+    parseResponse,
+    updatePrimaryTile,
+    getLocalTime,
+    updateSecondaryTile,
+  };
 })();
 
 const App = (() => {
