@@ -183,7 +183,7 @@ const Utilities = (() => {
     let hours = parseInt(time.slice(0, 2));
     let AmPm = hours > 12 ? "PM" : "AM";
     hours = hours % 12;
-    let minutes = parseInt(time.slice(3, 5));
+    let minutes = time.slice(3, 5);
     return `${hours}:${minutes}${AmPm}`;
   }
 
