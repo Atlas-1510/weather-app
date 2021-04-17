@@ -190,15 +190,19 @@ const Utilities = (() => {
   return { parseResponse, updatePrimaryTile, getLocalTime };
 })();
 
-searchSubmit.addEventListener("click", (event) => {
-  event.preventDefault();
-  Main.updateWeather(searchInput.value);
-});
+const App = (() => {
+  window.onload = Main.updateWeather();
 
-geolocation.addEventListener("click", (event) => {
-  event.preventDefault();
-  Main.updateWeather();
-});
+  searchSubmit.addEventListener("click", (event) => {
+    event.preventDefault();
+    Main.updateWeather(searchInput.value);
+  });
+
+  geolocation.addEventListener("click", (event) => {
+    event.preventDefault();
+    Main.updateWeather();
+  });
+})();
 
 // toggleHolder.addEventListener("change", (e) => {
 //   console.log("CHANGE");
