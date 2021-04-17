@@ -1,4 +1,5 @@
 $margin-default: 3%;
+$padding-default: 2vw;
 $border-radius-default: 25px;
 $bubble-background-color: #e8f1f2;
 $button-color: rgb(185, 69, 87);
@@ -137,7 +138,7 @@ main {
 
   #primaryWeather {
     grid-area: primary;
-    padding: $margin-default;
+    padding: $padding-default;
     display: grid;
     grid-template-columns: [first] 60% [second] 40% [third];
     grid-template-rows: [first] 1fr [second] 1fr [third] 1fr [fourth];
@@ -201,6 +202,45 @@ main {
 
   #secondaryWeather {
     grid-area: secondary;
+    padding: $padding-default;
+
+    display: grid;
+    grid-template-columns: [first] 1fr [second];
+    grid-template-rows: [first] 1fr [second] 1fr [third] 1fr[fourth] 1fr [fifth] 1fr [sixth] 1fr [seventh];
+    grid-template-areas: "first" "second" "third" "fourth" "fifth" "sixth";
+
+    .dailyForecast {
+      display: grid;
+      grid-template-columns: [first] 60% [second] 40% [third];
+      grid-template-rows: [first] 1fr [second];
+      grid-template-areas: "forecast icon";
+      position: relative;
+
+      .forecast {
+        grid-area: forecast;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        h2,
+        h3 {
+          padding: 0;
+          margin: 0;
+        }
+
+        h3 {
+          font-weight: $secondary-font-weight;
+        }
+      }
+
+      .forecastIcon {
+        // grid-area: icon;
+        height: 150%;
+        position: absolute;
+        left: 150px;
+        bottom: -20px;
+      }
+    }
   }
 
   #tertiaryWeather {
