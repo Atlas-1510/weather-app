@@ -151,7 +151,7 @@ const Utilities = (() => {
     locationTitle.textContent = `${tileInfo.location.city}, ${tileInfo.location.country}`;
 
     // Current time
-    locationTime.textContent = tileInfo.localTime;
+    locationTime.textContent = `${tileInfo.localTime.weekday}, ${tileInfo.localTime.time}`;
 
     // Weather icon
     let icon = tileInfo.weather.current.weather[0].icon;
@@ -176,12 +176,24 @@ const Utilities = (() => {
 
   function getLocalTime(timezone) {
     let now = new Date();
-    let time = now.toLocaleString("en-US", { timeZone: timezone });
-    time = time.slice(11, 22);
-    let time_re = /[\d]{1,2}:[\d]{1,2}/g;
-    let ampm_re = /(AM)|(PM)/g;
+    const options = {
+      weekday: "long",
+      hour: "numeric",
+      minute: "numeric",
+      timeZoneName: "short",
+      timeZone: timezone,
+    };
 
-    return `${time_re.exec(time)[0]} ${ampm_re.exec(time)[0]}`;
+    let dateTime = new Intl.DateTimeFormat("en-AU", options).formatToParts(now);
+
+    dateTime = {
+      weekday: dateTime[0].value,
+      time: `${dateTime[2].value}:${dateTime[4].value} ${dateTime[6].value}`,
+    };
+
+    console.log(dateTime);
+
+    return dateTime;
   }
 
   return { parseResponse, updatePrimaryTile, getLocalTime };
