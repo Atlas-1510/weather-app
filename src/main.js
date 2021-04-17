@@ -69,10 +69,8 @@ const Main = (() => {
     } else {
       returnedWeather = await Weather.currentLocationWeatherSearch();
     }
-
-    let localTime = Utilities.getLocalTime(
-      returnedWeather.weather.timezone_offset
-    );
+    console.log(returnedWeather.weather.timezone_offset);
+    let localTime = Utilities.getLocalTime(returnedWeather.weather.timezone);
     returnedWeather.localTime = localTime;
 
     console.log(returnedWeather);
@@ -177,14 +175,13 @@ const Utilities = (() => {
   }
 
   function getLocalTime(timezone) {
-    let adjustedTime = new Date().getTime() + timezone;
-    let time = new Date(adjustedTime).toTimeString();
-    time = time.slice(0, 8);
-    let hours = parseInt(time.slice(0, 2));
-    let AmPm = hours > 12 ? "PM" : "AM";
-    hours = hours % 12;
-    let minutes = time.slice(3, 5);
-    return `${hours}:${minutes}${AmPm}`;
+    let now = new Date();
+    let time = now.toLocaleString("en-US", { timeZone: timezone });
+    time = time.slice(11, 22);
+    let time_re = /[\d]{1,2}:[\d]{1,2}/g;
+    let ampm_re = /(AM)|(PM)/g;
+
+    return `${time_re.exec(time)[0]} ${ampm_re.exec(time)[0]}`;
   }
 
   return { parseResponse, updatePrimaryTile, getLocalTime };
