@@ -165,7 +165,9 @@ const Utilities = (() => {
     temperature.textContent = `${Math.round(tileInfo.weather.current.temp)}°`;
 
     // Current conditions
-    conditions.textContent = tileInfo.weather.current.weather[0].description;
+    let textContent = tileInfo.weather.current.weather[0].description;
+    textContent = textContent.charAt(0).toUpperCase() + textContent.slice(1);
+    conditions.textContent = textContent;
 
     // Chance of rain
     rain.textContent = `${Math.round(
