@@ -171,7 +171,7 @@ const Utilities = (() => {
 
     // Chance of rain
     rain.textContent = `${Math.round(
-      tileInfo.weather.daily[0].pop
+      tileInfo.weather.daily[0].pop * 100
     )}% chance of rain`;
 
     // High and low
