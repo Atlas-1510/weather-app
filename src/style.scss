@@ -272,7 +272,58 @@ main {
   }
 
   #tertiaryWeather {
+    padding-left: $padding-default;
+    padding-right: $padding-default;
+    padding-top: 1vw;
+    padding-bottom: 1vw;
     grid-area: tertiary;
+    display: grid;
+    grid-template-columns: [first] 1fr [second] 1fr [third] 1fr [fourth];
+    grid-template-rows: [first] 1fr [second];
+    grid-template-areas: "assorted moon sun";
+
+    #assorted-weather {
+      grid-area: assorted;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      div {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        font-size: larger;
+        font-weight: $secondary-font-weight;
+        border-bottom: 1px solid lightgrey;
+        padding-bottom: 0.5vh;
+        padding-top: 0.5vh;
+
+        img {
+          display: inline-block;
+          max-width: 1.5vw;
+        }
+
+        .detailTitle {
+          margin-left: 1vw;
+        }
+
+        .weatherDetail {
+          margin-left: auto;
+        }
+      }
+
+      #dew {
+        border-bottom: none;
+      }
+    }
+
+    #moon {
+      grid-area: moon;
+    }
+
+    #sun {
+      grid-area: sun;
+    }
   }
 }
 
