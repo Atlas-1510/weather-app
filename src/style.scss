@@ -1,4 +1,5 @@
-$content-width: 1000px;
+$content-max-width: 60vw;
+$content-width: 90%;
 $margin-default: 3%;
 $padding-default: 2vw;
 $border-radius-default: 25px;
@@ -37,9 +38,9 @@ body {
 
 nav {
   color: $bubble-background-color;
-  max-width: $content-width;
+  max-width: $content-max-width;
   margin: $margin-default;
-  width: 90%;
+  width: $content-width;
 
   form {
     width: 100%;
@@ -112,8 +113,8 @@ nav {
 
 main {
   height: 70vh;
-  max-width: $content-width;
-  width: 90%;
+  max-width: $content-max-width;
+  width: $content-width;
   margin: $margin-default;
   margin-bottom: $margin-default * 0.5;
   margin-top: 0;
@@ -208,48 +209,64 @@ main {
 
   #secondaryWeather {
     grid-area: secondary;
-    padding: $padding-default;
-
+    padding-top: 1vw;
+    padding-left: $padding-default;
+    padding-right: $padding-default;
+    overflow: scroll;
     display: grid;
     grid-template-columns: [first] 1fr [second];
     grid-template-rows: [first] 1fr [second] 1fr [third] 1fr[fourth] 1fr [fifth] 1fr [sixth] 1fr [seventh];
     grid-template-areas: "first" "second" "third" "fourth" "fifth" "sixth";
 
     .dailyForecast {
+      height: 10vh;
+      overflow: hidden;
       display: grid;
       grid-template-columns: [first] 70% [second] 30% [third];
-      grid-template-rows: [first] 1fr [second];
-      grid-template-areas: "forecast icon";
+      grid-template-rows: [first] 1fr [second] 1fr [third] 1fr [fourth];
+      grid-template-areas:
+        "day icon"
+        "highLow icon"
+        "conditions rain";
       position: relative;
-      margin-bottom: $margin-default;
+      border-bottom: 1px solid lightgrey;
+      padding-bottom: 1vw;
+      padding-top: 1vw;
 
-      .forecast {
-        grid-area: forecast;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+      .day {
+        grid-area: day;
+      }
 
-        h2,
-        h3 {
-          padding: 0;
-          margin: 0;
-        }
+      .forecast-conditions {
+        grid-area: conditions;
+      }
 
-        h3 {
-          font-weight: $secondary-font-weight;
-        }
-
-        .forecast-rain > img {
+      .forecast-rain {
+        grid-area: rain;
+        img {
           display: inline-block;
         }
       }
 
       .forecastIcon {
-        // grid-area: icon;
-        height: 150%;
+        grid-area: icon;
+        height: 120%;
         position: absolute;
-        left: 145px;
-        bottom: -20px;
+        bottom: 1vh;
+      }
+
+      .forecast-highLow {
+        grid-area: highLow;
+      }
+
+      h2,
+      h3 {
+        padding: 0;
+        margin: 0;
+      }
+
+      h3 {
+        font-weight: $secondary-font-weight;
       }
     }
   }
@@ -263,8 +280,8 @@ footer {
   padding: 0;
   margin: 0;
   max-height: 10vh;
-  max-width: $content-width;
-  width: 90%;
+  max-width: $content-max-width;
+  width: $content-width;
   display: flex;
   justify-content: flex-end;
   button {

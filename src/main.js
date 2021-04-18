@@ -225,28 +225,32 @@ const Utilities = (() => {
       }
       nextDay = days[nextDay];
 
-      let dayNode = forecasts[i - 1]
-        .querySelector(".forecast")
-        .querySelector(".day");
+      let dayNode = forecasts[i - 1].querySelector(".day");
       dayNode.textContent = nextDay;
 
-      // // Update icon
+      // Update icon
       let icon = forecasts[i - 1].querySelector(".forecastIcon");
       let icon_code = tileInfo.weather.daily[i].weather[0].icon;
       icon.src = Settings.icons[icon_code];
 
-      // // Update Rain
+      // Update conditions
+      let condition = forecasts[i - 1].querySelector(".forecast-conditions");
+
+      let conditionInput = tileInfo.weather.daily[i].weather[0].description;
+      conditionInput =
+        conditionInput.charAt(0).toUpperCase() + conditionInput.slice(1);
+      condition.textContent = conditionInput;
+
+      // Update Rain
       let rain = forecasts[i - 1]
-        .querySelector(".forecast")
+
         .querySelector(".forecast-rain")
         .querySelector("span");
       let pop = Math.round(tileInfo.weather.daily[i].pop * 100);
       rain.textContent = ` ${pop}%`;
 
       // Update high / low
-      let highLow = forecasts[i - 1]
-        .querySelector(".forecast")
-        .querySelector(".forecast-highLow");
+      let highLow = forecasts[i - 1].querySelector(".forecast-highLow");
       let high = Math.round(tileInfo.weather.daily[i].temp.max);
       let low = Math.round(tileInfo.weather.daily[i].temp.min);
       highLow.textContent = `${high}° / ${low}°`;
