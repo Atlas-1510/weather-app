@@ -1,3 +1,4 @@
+$content-width: 1000px;
 $margin-default: 3%;
 $padding-default: 2vw;
 $border-radius-default: 25px;
@@ -27,15 +28,18 @@ body {
   border: 0;
   display: flex;
   flex-direction: column;
+  align-items: center;
   font-family: "Roboto", sans-serif;
   max-height: 100%;
   overflow: hidden;
+  width: 100%;
 }
 
 nav {
   color: $bubble-background-color;
-
+  max-width: $content-width;
   margin: $margin-default;
+  width: 90%;
 
   form {
     width: 100%;
@@ -108,6 +112,8 @@ nav {
 
 main {
   height: 70vh;
+  max-width: $content-width;
+  width: 90%;
   margin: $margin-default;
   margin-bottom: $margin-default * 0.5;
   margin-top: 0;
@@ -211,10 +217,11 @@ main {
 
     .dailyForecast {
       display: grid;
-      grid-template-columns: [first] 60% [second] 40% [third];
+      grid-template-columns: [first] 70% [second] 30% [third];
       grid-template-rows: [first] 1fr [second];
       grid-template-areas: "forecast icon";
       position: relative;
+      margin-bottom: $margin-default;
 
       .forecast {
         grid-area: forecast;
@@ -230,6 +237,10 @@ main {
 
         h3 {
           font-weight: $secondary-font-weight;
+        }
+
+        .forecast-rain > img {
+          display: inline-block;
         }
       }
 
@@ -252,6 +263,8 @@ footer {
   padding: 0;
   margin: 0;
   max-height: 10vh;
+  max-width: $content-width;
+  width: 90%;
   display: flex;
   justify-content: flex-end;
   button {

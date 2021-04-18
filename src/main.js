@@ -236,9 +236,10 @@ const Utilities = (() => {
       // // Update Rain
       let rain = forecasts[i - 1]
         .querySelector(".forecast")
-        .querySelector(".forecast-rain");
-      let pop = tileInfo.weather.daily[i].pop * 100;
-      rain.textContent = `${pop}% chance of rain`;
+        .querySelector(".forecast-rain")
+        .querySelector("span");
+      let pop = Math.round(tileInfo.weather.daily[i].pop * 100);
+      rain.textContent = ` ${pop}%`;
 
       // Update high / low
       let highLow = forecasts[i - 1]
