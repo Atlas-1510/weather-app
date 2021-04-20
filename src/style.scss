@@ -112,6 +112,8 @@ nav {
 }
 
 main {
+  // Opacity starts at 0, and is changed to one by javascript once weather retrieved
+  opacity: 0;
   height: 70vh;
   max-width: $content-max-width;
   width: $content-width;
@@ -119,6 +121,7 @@ main {
   margin-bottom: $margin-default * 0.5;
   margin-top: 0;
   flex: 1;
+  transition: opacity 300ms;
   display: grid;
   grid-template-columns: [first] 1fr [second] $gap-size [third] 1fr [fourth] $gap-size [fifth] 1fr [sixth];
   grid-template-rows: [first] 1fr [second] $gap-size [third] 1fr [fourth] $gap-size [fifth] 1fr [sixth];

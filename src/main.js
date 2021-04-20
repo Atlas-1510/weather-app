@@ -30,6 +30,7 @@ console.log("This is a second change for git rebase test");
 const openweathermap_key = "8d3007697e1595ff555d6df24f4492f3";
 
 // DOM elements
+const main = document.querySelector("main");
 // NAV
 const searchInput = document.getElementById("searchInput");
 const searchSubmit = document.getElementById("searchSubmit");
@@ -85,8 +86,10 @@ const Settings = {
   },
 };
 
-const Main = (() => {
+const Control = (() => {
   async function updateWeather(searchValue) {
+    main.dispatchEvent(Styling.weatherRequested);
+
     let returnedWeather;
     if (searchValue) {
       returnedWeather = await Weather.customWeatherSearch(searchValue);
@@ -103,6 +106,8 @@ const Main = (() => {
     Utilities.updatePrimaryTile(returnedWeather);
     Utilities.updateSecondaryTile(returnedWeather);
     Utilities.updateTertiaryTile(returnedWeather);
+
+    main.dispatchEvent(Styling.weatherRecieved);
   }
 
   return { updateWeather };
@@ -225,15 +230,6 @@ const Utilities = (() => {
     return dateTime;
   }
 
-  // function ADVANCED_GETTIME(time) {
-  //   let dt = new Date(time * 1000);
-  //   console.log(dt);
-  //   let h = dt.getHours();
-  //   let m = "0" + dt.getMinutes();
-  //   let t = h + ":" + m.substr(-2);
-  //   return t;
-  // }
-
   function updateSecondaryTile(tileInfo) {
     const days = [
       "Monday",
@@ -337,17 +333,32 @@ const Utilities = (() => {
   };
 })();
 
+const Styling = (() => {
+  const weatherRequested = new Event("weatherRequested");
+  main.addEventListener("weatherRequested", () => {
+    main.style.opacity = 0;
+  });
+
+  const weatherRecieved = new Event("weatherRecieved");
+  main.addEventListener("weatherRecieved", () => {
+    main.style.opacity = 1;
+  });
+
+  return { weatherRequested, weatherRecieved };
+})();
+
 const App = (() => {
-  window.onload = Main.updateWeather();
+  window.onload = Control.updateWeather();
 
   searchSubmit.addEventListener("click", (event) => {
     event.preventDefault();
-    Main.updateWeather(searchInput.value);
+    Control.updateWeather(searchInput.value);
+    searchInput.value = "";
   });
 
   geolocation.addEventListener("click", (event) => {
     event.preventDefault();
-    Main.updateWeather();
+    Control.updateWeather();
   });
 })();
 
