@@ -1,5 +1,6 @@
 // Styles
-import "./style.scss";
+import "./styles/style.scss";
+import "./styles/load_spinner.scss";
 
 // Modules
 import * as Toggle from "./toggle/toggle";
@@ -60,6 +61,9 @@ const sunrise = document.getElementById("sunrise");
 const sunset = document.getElementById("sunset");
 const moonrise = document.getElementById("moonrise");
 const moonset = document.getElementById("moonset");
+// Loading indicator
+const spinnerContainer = document.getElementById("spinnerContainer");
+
 // const toggleHolder = document.querySelector(".toggle-holder");
 
 const Settings = {
@@ -336,12 +340,23 @@ const Utilities = (() => {
 const Styling = (() => {
   const weatherRequested = new Event("weatherRequested");
   main.addEventListener("weatherRequested", () => {
-    main.style.opacity = 0;
+    spinnerContainer.classList.add("active");
+    let tiles = main.querySelectorAll(".bubble");
+    tiles = [...tiles];
+    tiles.forEach((tile) => {
+      tile.style.opacity = 0;
+    });
+    console.log(spinnerContainer);
   });
 
   const weatherRecieved = new Event("weatherRecieved");
   main.addEventListener("weatherRecieved", () => {
-    main.style.opacity = 1;
+    spinnerContainer.classList.remove("active");
+    let tiles = main.querySelectorAll(".bubble");
+    tiles = [...tiles];
+    tiles.forEach((tile) => {
+      tile.style.opacity = 1;
+    });
   });
 
   return { weatherRequested, weatherRecieved };

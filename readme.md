@@ -9,3 +9,7 @@ A simple weather app
 - moonrise, moonset by Xinh Studio from the Noun Project
 - sunrise, sunset by P Thanga Vignesh from the Noun Project
 - Others from https://icons.getbootstrap.com
+
+# Loading indicator
+
+- Sourced from https://loading.io/css/
