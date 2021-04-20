@@ -21,6 +21,8 @@ import Snowy6 from "./weather_icons/snowy-6.svg";
 
 console.log("This is just a change to test git branching");
 
+console.log("This is a second change for git rebase test");
+
 // API Keys
 const openweathermap_key = "8d3007697e1595ff555d6df24f4492f3";
 
