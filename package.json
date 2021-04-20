@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch",
-    "start": "webpack serve --open 'Google Chrome'"
+    "start": "webpack serve"
   },
   "repository": {
     "type": "git",
