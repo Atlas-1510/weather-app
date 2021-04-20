@@ -127,7 +127,7 @@ main {
     "primary primary primary . secondary"
     "primary primary primary . secondary"
     ". . . . secondary"
-    "tertiary tertiary tertiary.  secondary";
+    "tertiary tertiary tertiary .  secondary";
 
   .bubble {
     // background-color: $bubble-background-color;
@@ -278,15 +278,18 @@ main {
     padding-bottom: 1vw;
     grid-area: tertiary;
     display: grid;
-    grid-template-columns: [first] 1fr [second] 1fr [third] 1fr [fourth];
+    grid-template-columns: [first] 1fr [second] 1fr [third];
     grid-template-rows: [first] 1fr [second];
-    grid-template-areas: "assorted moon sun";
+    grid-template-areas: "assorted risesAndSets";
+    max-height: 20vh;
+    // overflow: hidden;
 
     #assorted-weather {
       grid-area: assorted;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      padding-right: 0.5vw;
 
       div {
         display: flex;
@@ -317,12 +320,49 @@ main {
       }
     }
 
-    #moon {
-      grid-area: moon;
-    }
+    #risesAndSets {
+      padding-left: 0.5vw;
+      max-width: 100%;
+      max-height: inherit;
+      // border-left: 1px solid lightgray;
+      display: grid;
+      grid-template-columns: [first] 1fr [second] 1fr [third];
+      grid-template-rows: [first] 1fr [second] 1fr [third];
+      grid-template-areas:
+        "sunrise sunset"
+        "moonrise moonset";
 
-    #sun {
-      grid-area: sun;
+      div {
+        // min-width: 0;
+        // min-height: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .img-cropper {
+          // max-width: 25%;
+          width: 25%;
+          overflow: hidden;
+          img {
+            margin-bottom: -10px;
+          }
+        }
+      }
+
+      #sunrise {
+        grid-area: sunrise;
+      }
+
+      #sunset {
+        grid-area: sunset;
+      }
+
+      #moonrise {
+        grid-area: moonrise;
+      }
+
+      #moonset {
+        grid-area: moonset;
+      }
     }
   }
 }
