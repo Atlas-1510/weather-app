@@ -48,7 +48,10 @@ const pressure = document
   .getElementById("pressure")
   .querySelector(".weatherDetail");
 const dew = document.getElementById("dew").querySelector(".weatherDetail");
-
+const sunrise = document.getElementById("sunrise");
+const sunset = document.getElementById("sunset");
+const moonrise = document.getElementById("moonrise");
+const moonset = document.getElementById("moonset");
 // const toggleHolder = document.querySelector(".toggle-holder");
 
 const Settings = {
@@ -83,7 +86,10 @@ const Main = (() => {
     } else {
       returnedWeather = await Weather.currentLocationWeatherSearch();
     }
-    let localTime = Utilities.getLocalTime(returnedWeather.weather.timezone);
+    let localTime = Utilities.getLocalTime(
+      new Date(),
+      returnedWeather.weather.timezone
+    );
     returnedWeather.localTime = localTime;
 
     console.log(returnedWeather);
@@ -191,8 +197,7 @@ const Utilities = (() => {
     )}° / ${Math.round(tileInfo.weather.daily[0].temp.min)}°`;
   }
 
-  function getLocalTime(timezone) {
-    let now = new Date();
+  function getLocalTime(time, timezone) {
     const options = {
       weekday: "long",
       hour: "numeric",
@@ -201,7 +206,9 @@ const Utilities = (() => {
       timeZone: timezone,
     };
 
-    let dateTime = new Intl.DateTimeFormat("en-AU", options).formatToParts(now);
+    let dateTime = new Intl.DateTimeFormat("en-AU", options).formatToParts(
+      time
+    );
 
     dateTime = {
       weekday: dateTime[0].value,
@@ -210,6 +217,15 @@ const Utilities = (() => {
 
     return dateTime;
   }
+
+  // function ADVANCED_GETTIME(time) {
+  //   let dt = new Date(time * 1000);
+  //   console.log(dt);
+  //   let h = dt.getHours();
+  //   let m = "0" + dt.getMinutes();
+  //   let t = h + ":" + m.substr(-2);
+  //   return t;
+  // }
 
   function updateSecondaryTile(tileInfo) {
     const days = [
@@ -283,8 +299,28 @@ const Utilities = (() => {
     )} mb`;
 
     dew.textContent = `${Math.round(tileInfo.weather.daily[0].dew_point)}°`;
-  }
 
+    // Update sun and moon times
+    sunrise.textContent = getLocalTime(
+      1000 * tileInfo.weather.daily[0].sunrise,
+      tileInfo.weather.timezone
+    ).time;
+
+    sunset.textContent = getLocalTime(
+      1000 * tileInfo.weather.daily[0].sunset,
+      tileInfo.weather.timezone
+    ).time;
+
+    moonrise.textContent = getLocalTime(
+      1000 * tileInfo.weather.daily[0].moonrise,
+      tileInfo.weather.timezone
+    ).time;
+
+    moonset.textContent = getLocalTime(
+      1000 * tileInfo.weather.daily[0].moonset,
+      tileInfo.weather.timezone
+    ).time;
+  }
   return {
     parseResponse,
     updatePrimaryTile,
