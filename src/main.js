@@ -38,6 +38,16 @@ const highLow = document.getElementById("highLow");
 const locationTime = document.getElementById("locationTime");
 // Secondary Tile
 const secondaryTile = document.getElementById("secondaryWeather");
+// Tertiary Tile
+const wind = document.getElementById("wind").querySelector(".weatherDetail");
+const humidity = document
+  .getElementById("humidity")
+  .querySelector(".weatherDetail");
+const uv = document.getElementById("uv").querySelector(".weatherDetail");
+const pressure = document
+  .getElementById("pressure")
+  .querySelector(".weatherDetail");
+const dew = document.getElementById("dew").querySelector(".weatherDetail");
 
 // const toggleHolder = document.querySelector(".toggle-holder");
 
@@ -79,6 +89,7 @@ const Main = (() => {
     console.log(returnedWeather);
     Utilities.updatePrimaryTile(returnedWeather);
     Utilities.updateSecondaryTile(returnedWeather);
+    Utilities.updateTertiaryTile(returnedWeather);
   }
 
   return { updateWeather };
@@ -257,11 +268,29 @@ const Utilities = (() => {
     }
   }
 
+  function updateTertiaryTile(tileInfo) {
+    // Update assorted weather
+    wind.textContent = `${Math.round(
+      tileInfo.weather.daily[0].wind_speed
+    )} km/h`;
+
+    humidity.textContent = `${Math.round(tileInfo.weather.daily[0].humidity)}%`;
+
+    uv.textContent = `${Math.round(tileInfo.weather.daily[0].uvi)} of 10`;
+
+    pressure.textContent = `${Math.round(
+      tileInfo.weather.daily[0].pressure
+    )} mb`;
+
+    dew.textContent = `${Math.round(tileInfo.weather.daily[0].dew_point)}°`;
+  }
+
   return {
     parseResponse,
     updatePrimaryTile,
     getLocalTime,
     updateSecondaryTile,
+    updateTertiaryTile,
   };
 })();
 
