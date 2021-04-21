@@ -1,7 +1,8 @@
 $content-max-width: 60vw;
 $content-width: 90%;
 $margin-default: 3%;
-$padding-default: 2vw;
+// $padding-default: 2vw;
+$padding-default: 1vw;
 $border-radius-default: 25px;
 $bubble-background-color: #e8f1f2;
 $button-color: rgb(185, 69, 87);
@@ -123,7 +124,7 @@ main {
 
   display: grid;
   grid-template-columns: [first] 1fr [second] $gap-size [third] 1fr [fourth] $gap-size [fifth] 1fr [sixth];
-  grid-template-rows: [first] 1fr [second] $gap-size [third] 1fr [fourth] $gap-size [fifth] 1fr [sixth];
+  grid-template-rows: [first] 0.7fr [second] $gap-size [third] 0.5fr [fourth] $gap-size [fifth] 1fr [sixth];
   grid-template-areas:
     "primary primary primary . secondary"
     "primary primary primary . secondary"
@@ -163,7 +164,7 @@ main {
     padding: $padding-default;
     display: grid;
     grid-template-columns: [first] 60% [second] 40% [third];
-    grid-template-rows: [first] 1fr [second] 1fr [third] 1fr [fourth];
+    grid-template-rows: [first] 1fr [second] 0.5fr [third] 1fr [fourth];
     grid-template-areas:
       ". weatherIcon"
       "temperature weatherIcon"
@@ -190,7 +191,7 @@ main {
 
     #temperature {
       grid-area: temperature;
-      font-size: 5rem;
+      font-size: 4rem;
       margin: 0;
       font-weight: $primary-font-weight;
     }
@@ -289,21 +290,23 @@ main {
   #tertiaryWeather {
     padding-left: $padding-default;
     padding-right: $padding-default;
-    padding-top: 1vw;
-    padding-bottom: 1vw;
+    // padding-top: $padding-default;
+    // padding-bottom: $padding-default;
     grid-area: tertiary;
     display: grid;
     grid-template-columns: [first] 1fr [second] 1fr [third];
     grid-template-rows: [first] 1fr [second];
     grid-template-areas: "assorted risesAndSets";
-    max-height: 20vh;
-    // overflow: hidden;
+    height: 100%;
+    overflow: hidden;
 
     #assorted-weather {
       grid-area: assorted;
+      padding-top: $padding-default;
+      padding-bottom: $padding-default;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: space-around;
       padding-right: 0.5vw;
 
       div {
@@ -336,10 +339,11 @@ main {
     }
 
     #risesAndSets {
+      padding-top: $padding-default;
+      padding-bottom: $padding-default;
       padding-left: 0.5vw;
       max-width: 100%;
-      max-height: inherit;
-      // border-left: 1px solid lightgray;
+      max-height: 80%;
       display: grid;
       grid-template-columns: [first] 1fr [second] 1fr [third];
       grid-template-rows: [first] 1fr [second] 1fr [third];
@@ -348,18 +352,21 @@ main {
         "moonrise moonset";
 
       div {
-        // min-width: 0;
-        // min-height: 0;
+        max-height: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
         .img-cropper {
-          // max-width: 25%;
-          width: 25%;
+          width: 40%;
+          max-width: 4vw;
           overflow: hidden;
           img {
-            margin-bottom: -10px;
+            margin-bottom: -50%;
           }
+        }
+        h4 {
+          margin: 10%;
         }
       }
 
@@ -405,5 +412,105 @@ footer {
       filter: invert(87%) sepia(16%) saturate(73%) hue-rotate(140deg)
         brightness(109%) contrast(90%) opacity(0.7);
     }
+  }
+}
+
+// Responsive design
+@media screen and (max-width: 1500px) and (min-width: 801px) {
+  nav,
+  main,
+  footer {
+    max-width: 100vw;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1rem;
+  }
+
+  nav {
+    max-width: 90vw;
+
+    form > h1 {
+      font-size: 2rem;
+    }
+  }
+
+  body {
+    overflow: scroll;
+  }
+
+  main {
+    height: auto;
+    margin: $margin-default;
+    max-width: 90vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    #primaryWeather {
+      width: 100%;
+      div > #locationTitle {
+        font-size: 1.5rem;
+      }
+
+      #temperature {
+        font-size: 2rem;
+        margin: 0;
+        font-weight: $primary-font-weight;
+      }
+
+      h2 {
+        font-size: 1rem;
+      }
+    }
+
+    #secondaryWeather {
+      height: 250px;
+      width: 100%;
+      margin-top: $margin-default;
+
+      .dailyForecast {
+        position: relative;
+        img {
+          justify-self: end;
+          align-self: center;
+          position: relative;
+          top: 3%;
+        }
+
+        .forecast-rain {
+          justify-self: end;
+          align-self: center;
+        }
+      }
+    }
+
+    #tertiaryWeather {
+      margin-top: $margin-default;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      div {
+        width: 100%;
+      }
+
+      #risesAndSets {
+        div > .img-cropper {
+          max-width: none;
+        }
+      }
+    }
+  }
+
+  footer {
+    max-width: 90vw;
   }
 }
