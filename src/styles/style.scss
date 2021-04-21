@@ -35,6 +35,74 @@ body {
   max-height: 100%;
   overflow: hidden;
   width: 100%;
+  position: relative;
+}
+
+#mobileMenu {
+  background: rgba(158, 158, 158, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(11px);
+  -webkit-backdrop-filter: blur(11px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0;
+  position: absolute;
+  transition: opacity 300ms;
+
+  #mobileSearch {
+    display: none;
+    margin-top: 50%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    #mobileSearchInput {
+      background-color: $bubble-background-color;
+      color: $font-color-primary;
+      border-radius: $border-radius-default;
+      border: none;
+      height: 100%;
+      width: 80%;
+      padding-left: 1rem;
+      margin: $margin-default;
+      font-size: 1.5rem;
+    }
+
+    #buttonHolder {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      button {
+        // height: inherit;
+        max-width: 30vw;
+        flex: 1;
+        border-radius: 5px;
+        margin: 0px $margin-default 0px 0px;
+        padding: 3px 12px 3px 12px;
+        border: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $button-color;
+        img {
+          width: 25px;
+          height: auto;
+          padding: 0;
+          filter: invert(100%) sepia(0%) saturate(7451%) hue-rotate(136deg)
+            brightness(112%) contrast(112%);
+        }
+      }
+    }
+  }
+}
+
+#mobileMenu.active {
+  z-index: 2;
+  opacity: 1;
 }
 
 nav {
@@ -512,5 +580,11 @@ footer {
 
   footer {
     max-width: 90vw;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  form > div > #searchInput {
+    display: none;
   }
 }

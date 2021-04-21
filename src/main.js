@@ -25,7 +25,7 @@ const openweathermap_key = "8d3007697e1595ff555d6df24f4492f3";
 
 // DOM elements
 const main = document.querySelector("main");
-// NAV
+// Nav
 const searchInput = document.getElementById("searchInput");
 const searchSubmit = document.getElementById("searchSubmit");
 const geolocation = document.getElementById("geolocation");
@@ -56,6 +56,12 @@ const moonrise = document.getElementById("moonrise");
 const moonset = document.getElementById("moonset");
 // Loading indicator
 const spinnerContainer = document.getElementById("spinnerContainer");
+// Mobile Menu
+const mobileMenu = document.getElementById("mobileMenu");
+const mobileSearch = document.getElementById("mobileSearch");
+const mobileSearchInput = document.getElementById("mobileSearchInput");
+const mobileSearchSubmit = document.getElementById("mobileSearchSubmit");
+const mobileSearchCancel = document.getElementById("mobileSearchCancel");
 
 // const toggleHolder = document.querySelector(".toggle-holder");
 
@@ -99,7 +105,6 @@ const Control = (() => {
     );
     returnedWeather.localTime = localTime;
 
-    console.log(returnedWeather);
     Utilities.updatePrimaryTile(returnedWeather);
     Utilities.updateSecondaryTile(returnedWeather);
     Utilities.updateTertiaryTile(returnedWeather);
@@ -240,8 +245,6 @@ const Utilities = (() => {
 
     const forecasts = [...secondaryTile.querySelectorAll(".dailyForecast")];
 
-    console.log(forecasts);
-
     // Loop starts on 1 as first day (0) is in the primary tile
     for (let i = 1; i < 7; i++) {
       // Update day
@@ -339,7 +342,6 @@ const Styling = (() => {
     tiles.forEach((tile) => {
       tile.style.opacity = 0;
     });
-    console.log(spinnerContainer);
   });
 
   const weatherRecieved = new Event("weatherRecieved");
@@ -360,13 +362,38 @@ const App = (() => {
 
   searchSubmit.addEventListener("click", (event) => {
     event.preventDefault();
-    Control.updateWeather(searchInput.value);
-    searchInput.value = "";
+    const vw = Math.max(
+      document.documentElement.clientWidth || 0,
+      window.innerWidth || 0
+    );
+
+    // Mobile
+    if (vw < 700) {
+      mobileMenu.classList.add("active");
+      mobileSearch.style.display = "flex";
+    } else {
+      // Desktop
+      Control.updateWeather(searchInput.value);
+      searchInput.value = "";
+    }
   });
 
   geolocation.addEventListener("click", (event) => {
     event.preventDefault();
     Control.updateWeather();
+  });
+
+  // Mobile
+  mobileSearchCancel.addEventListener("click", () => {
+    mobileSearch.style.display = "none";
+    mobileMenu.classList.remove("active");
+  });
+
+  mobileSearchSubmit.addEventListener("click", () => {
+    mobileSearch.style.display = "none";
+    mobileMenu.classList.remove("active");
+    Control.updateWeather(mobileSearchInput.value);
+    mobileSearchInput.value = "";
   });
 })();
 
