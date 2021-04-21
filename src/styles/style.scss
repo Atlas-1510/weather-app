@@ -38,7 +38,7 @@ body {
   position: relative;
 }
 
-#mobileMenu {
+#glassPopUp {
   background: rgba(158, 158, 158, 0.2);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(11px);
@@ -98,9 +98,58 @@ body {
       }
     }
   }
+
+  #settingsContainer {
+    display: none;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    #settingsPanel {
+      width: 40%;
+      height: 40%;
+      background: rgba(158, 158, 158, 0.4);
+      border-radius: $border-radius-default;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      div {
+        display: flex;
+        margin-bottom: 2vh;
+        h2 {
+          margin: 0 1vw 0 1vw;
+        }
+      }
+
+      button {
+        // height: inherit;
+        max-width: 30vw;
+        max-height: 5vh;
+        flex: 1;
+        border-radius: 5px;
+        margin: 0px $margin-default 0px 0px;
+        padding: 3px 12px 3px 12px;
+        border: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $button-color;
+        img {
+          width: 25px;
+          height: auto;
+          padding: 0;
+          filter: invert(100%) sepia(0%) saturate(7451%) hue-rotate(136deg)
+            brightness(112%) contrast(112%);
+        }
+      }
+    }
+  }
 }
 
-#mobileMenu.active {
+#glassPopUp.active {
   z-index: 2;
   opacity: 1;
 }

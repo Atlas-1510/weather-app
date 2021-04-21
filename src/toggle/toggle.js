@@ -17,7 +17,5 @@ export function generateToggle(id) {
 
   label.appendChild(div);
 
-  console.log(label);
-
   return label;
 }

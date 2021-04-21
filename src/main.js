@@ -25,6 +25,11 @@ const openweathermap_key = "8d3007697e1595ff555d6df24f4492f3";
 
 // DOM elements
 const main = document.querySelector("main");
+const glassPopUp = document.getElementById("glassPopUp");
+const settingsContainer = document.getElementById("settingsContainer");
+const settingsPanel = document.getElementById("settingsPanel");
+const settings = document.getElementById("settings");
+const settingsExit = document.getElementById("settingsExit");
 // Nav
 const searchInput = document.getElementById("searchInput");
 const searchSubmit = document.getElementById("searchSubmit");
@@ -57,7 +62,6 @@ const moonset = document.getElementById("moonset");
 // Loading indicator
 const spinnerContainer = document.getElementById("spinnerContainer");
 // Mobile Menu
-const mobileMenu = document.getElementById("mobileMenu");
 const mobileSearch = document.getElementById("mobileSearch");
 const mobileSearchInput = document.getElementById("mobileSearchInput");
 const mobileSearchSubmit = document.getElementById("mobileSearchSubmit");
@@ -65,7 +69,7 @@ const mobileSearchCancel = document.getElementById("mobileSearchCancel");
 
 // const toggleHolder = document.querySelector(".toggle-holder");
 
-const Settings = {
+const Options = {
   weatherUnit: "metric",
   icons: {
     "01d": Day,
@@ -140,7 +144,7 @@ const Weather = (() => {
   async function getWeatherAPI(lat, lon) {
     // Uses OpenWeatherMap one-call API (https://openweathermap.org/api/one-call-api) to get weather information
     let API_response = await fetch(
-      `https://api.openweathermap.org/data/2.5/onecall?exclude=minutely&units=${Settings.weatherUnit}&lat=${lat}&lon=${lon}&appid=${openweathermap_key}`,
+      `https://api.openweathermap.org/data/2.5/onecall?exclude=minutely&units=${Options.weatherUnit}&lat=${lat}&lon=${lon}&appid=${openweathermap_key}`,
       { mode: "cors" }
     );
 
@@ -190,7 +194,7 @@ const Utilities = (() => {
 
     // Weather icon
     let icon = tileInfo.weather.current.weather[0].icon;
-    weatherIcon.src = Settings.icons[icon];
+    weatherIcon.src = Options.icons[icon];
 
     // Current temperature
     temperature.textContent = `${Math.round(tileInfo.weather.current.temp)}°`;
@@ -261,7 +265,7 @@ const Utilities = (() => {
       // Update icon
       let icon = forecasts[i - 1].querySelector(".forecastIcon");
       let icon_code = tileInfo.weather.daily[i].weather[0].icon;
-      icon.src = Settings.icons[icon_code];
+      icon.src = Options.icons[icon_code];
 
       // Update conditions
       let condition = forecasts[i - 1].querySelector(".forecast-conditions");
@@ -358,7 +362,21 @@ const Styling = (() => {
 })();
 
 const App = (() => {
-  window.onload = Control.updateWeather();
+  window.onload = () => {
+    Control.updateWeather();
+    const unitToggle = Toggle.generateToggle("unitToggle");
+    unitToggle.addEventListener("change", () => {
+      if (unitToggle.checked) {
+        Options.weatherUnit = "metric";
+        unitToggle.checked = false;
+      } else if (!unitToggle.checked) {
+        Options.weatherUnit = "imperial";
+        unitToggle.checked = true;
+      }
+    });
+
+    document.querySelector(".togggleHolder").appendChild(unitToggle);
+  };
 
   searchSubmit.addEventListener("click", (event) => {
     event.preventDefault();
@@ -369,7 +387,7 @@ const App = (() => {
 
     // Mobile
     if (vw < 700) {
-      mobileMenu.classList.add("active");
+      glassPopUp.classList.add("active");
       mobileSearch.style.display = "flex";
     } else {
       // Desktop
@@ -383,26 +401,37 @@ const App = (() => {
     Control.updateWeather();
   });
 
+  settings.addEventListener("click", () => {
+    glassPopUp.classList.add("active");
+    settingsContainer.style.display = "flex";
+  });
+
   // Mobile
   mobileSearchCancel.addEventListener("click", () => {
     mobileSearch.style.display = "none";
-    mobileMenu.classList.remove("active");
+    glassPopUp.classList.remove("active");
   });
 
   mobileSearchSubmit.addEventListener("click", () => {
     mobileSearch.style.display = "none";
-    mobileMenu.classList.remove("active");
+    glassPopUp.classList.remove("active");
     Control.updateWeather(mobileSearchInput.value);
     mobileSearchInput.value = "";
+  });
+
+  // Settings
+  settingsExit.addEventListener("click", () => {
+    settingsContainer.style.display = "none";
+    glassPopUp.classList.remove("active");
   });
 })();
 
 // toggleHolder.addEventListener("change", (e) => {
 //   console.log("CHANGE");
 //   if (e.target.checked) {
-//     Settings.weatherUnit = "metric";
+//     Options.weatherUnit = "metric";
 //   } else {
-//     Settings.weatherUnit = "imperial";
+//     Options.weatherUnit = "imperial";
 //   }
-//   console.log(Settings.weatherUnit);
+//   console.log(Options.weatherUnit);
 // });

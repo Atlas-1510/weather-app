@@ -7,12 +7,21 @@
     <title>WeatherApp</title>
   </head>
   <body>
-    <div id="mobileMenu">
+    <div id="glassPopUp">
       <div id="mobileSearch">
         <input type="text" id="mobileSearchInput">
         <div id="buttonHolder">
         <button id="mobileSearchSubmit"><img src="./img/search.svg"></button>
         <button id="mobileSearchCancel"><img src="./img/cancel.svg"></button>
+        </div>
+      </div>
+      <div id="settingsContainer">
+        <div id="settingsPanel">
+          <div>
+            <h2>Metric units</h2>
+            <div class="togggleHolder"></div>
+          </div>
+          <button id="settingsExit"><img src="./img/cancel.svg"></button>
         </div>
       </div>
     </div>
@@ -169,7 +178,7 @@
       </div>
     </main>
     <footer>
-      <button>
+      <button id="settings">
         <img src="./img/gear.svg" />
       </button>
     </footer>
