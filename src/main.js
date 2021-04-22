@@ -6,19 +6,19 @@ import "./styles/load_spinner.scss";
 import * as Toggle from "./toggle/toggle";
 
 // Images
-import CloudyDayOne from "./weather_icons/cloudy-day-1.svg";
-import CloudyNightOne from "./weather_icons/cloudy-night-1.svg";
-import CloudyDayTwo from "./weather_icons/cloudy-day-2.svg";
-import CloudyNightTwo from "./weather_icons/cloudy-night-2.svg";
-import Cloudy from "./weather_icons/cloudy.svg";
-import Day from "./weather_icons/day.svg";
-import Night from "./weather_icons/night.svg";
-import RainyThree from "./weather_icons/rainy-3.svg";
-import RainyFour from "./weather_icons/rainy-4.svg";
-import RainySix from "./weather_icons/rainy-6.svg";
-import Thunder from "./weather_icons/thunder.svg";
-import Snowy3 from "./weather_icons/snowy-3.svg";
-import Snowy6 from "./weather_icons/snowy-6.svg";
+import CloudyDayOne from "./img/weather_icons/cloudy-day-1.svg";
+import CloudyNightOne from "./img/weather_icons/cloudy-night-1.svg";
+import CloudyDayTwo from "./img/weather_icons/cloudy-day-2.svg";
+import CloudyNightTwo from "./img/weather_icons/cloudy-night-2.svg";
+import Cloudy from "./img/weather_icons/cloudy.svg";
+import Day from "./img/weather_icons/day.svg";
+import Night from "./img/weather_icons/night.svg";
+import RainyThree from "./img/weather_icons/rainy-3.svg";
+import RainyFour from "./img/weather_icons/rainy-4.svg";
+import RainySix from "./img/weather_icons/rainy-6.svg";
+import Thunder from "./img/weather_icons/thunder.svg";
+import Snowy3 from "./img/weather_icons/snowy-3.svg";
+import Snowy6 from "./img/weather_icons/snowy-6.svg";
 
 // API Keys
 const openweathermap_key = "8d3007697e1595ff555d6df24f4492f3";
@@ -66,8 +66,6 @@ const mobileSearch = document.getElementById("mobileSearch");
 const mobileSearchInput = document.getElementById("mobileSearchInput");
 const mobileSearchSubmit = document.getElementById("mobileSearchSubmit");
 const mobileSearchCancel = document.getElementById("mobileSearchCancel");
-
-// const toggleHolder = document.querySelector(".toggle-holder");
 
 const Options = {
   weatherUnit: "metric",
@@ -425,13 +423,3 @@ const App = (() => {
     glassPopUp.classList.remove("active");
   });
 })();
-
-// toggleHolder.addEventListener("change", (e) => {
-//   console.log("CHANGE");
-//   if (e.target.checked) {
-//     Options.weatherUnit = "metric";
-//   } else {
-//     Options.weatherUnit = "imperial";
-//   }
-//   console.log(Options.weatherUnit);
-// });
