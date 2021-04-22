@@ -1,5 +1,7 @@
 # WeatherApp
 
+View the project here: https://atlas-1510.github.io/weather-app/
+
 This is a simple weather application, built as part of The Odin Project. The application allows a user to view weather and local time for their current location, or a custom location. Units can be changed from metric to imperial. The project use the Nominatim API for latitude/longitude lookup, and OpenWeatherMap API to get weather data for those coordinates. The geolocation API is used to get weather at user location.
 
 ### Assets
