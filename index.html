@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WeatherApp</title>
+  <script defer src="/weather-app/main.bundle.js"></script></head>
+  <body>
+    <div id="glassPopUp">
+      <div id="mobileSearch">
+        <input type="text" id="mobileSearchInput">
+        <div id="buttonHolder">
+        <button id="mobileSearchSubmit"><img src="/weather-app/b1f781b99ceaafb9c831.svg"></button>
+        <button id="mobileSearchCancel"><img src="/weather-app/85f9f2a1f603d5a966a4.svg"></button>
+        </div>
+      </div>
+      <div id="settingsContainer">
+        <div id="settingsPanel">
+          <div>
+            <h2>Metric units</h2>
+            <div class="togggleHolder"></div>
+          </div>
+          <button id="settingsExit"><img src="/weather-app/85f9f2a1f603d5a966a4.svg"></button>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <form>
+        <h1>WeatherApp</h1>
+        <div id="userControlContainer">
+          <label for="searchInput"></label>
+          <input
+            name="searchInput"
+            id="searchInput"
+            type="text"
+            placeholder="Search"
+          />
+          <button id="searchSubmit"><img src="/weather-app/b1f781b99ceaafb9c831.svg" /></button>
+          <button id="geolocation">
+            <img src="/weather-app/338e9fa341074b0bd098.svg" />
+          </button>
+        </div>
+      </form>
+    </nav>
+    <main>
+      <div id="primaryWeather" class="bubble">
+        <div id="titleTime">
+          <h1 id="locationTitle"></h1>
+          <h2 id="locationTime"></h2>
+        </div>
+        <h1 id="temperature"></h1>
+        <div id="weatherIconHolder">
+          <img id="weatherIcon" />
+        </div>
+
+        <div id="weatherDetails">
+          <div>
+            <h2 id="conditions" class="weatherDetail"></h2>
+            <h2 id="highLow" class="weatherDetail"></h2>
+          </div>
+          <h2 id="rain" class="weatherDetail"></h2>
+        </div>
+      </div>
+      <div id="secondaryWeather" class="bubble">
+        <div class="dailyForecast">
+          <h2 class="day"></h2>
+          <h3 class="forecast-conditions"></h3>
+          <h3 class="forecast-rain">
+            <img src="/weather-app/ef1af880bf3763354bc2.svg" /><span></span>
+          </h3>
+          <h3 class="forecast-highLow"></h3>
+          <img class="forecastIcon" />
+        </div>
+        <div class="dailyForecast">
+          <h2 class="day"></h2>
+          <h3 class="forecast-conditions"></h3>
+          <h3 class="forecast-rain">
+            <img src="/weather-app/ef1af880bf3763354bc2.svg" /><span></span>
+          </h3>
+          <h3 class="forecast-highLow"></h3>
+          <img class="forecastIcon" />
+        </div>
+        <div class="dailyForecast">
+          <h2 class="day"></h2>
+          <h3 class="forecast-conditions"></h3>
+          <h3 class="forecast-rain">
+            <img src="/weather-app/ef1af880bf3763354bc2.svg" /><span></span>
+          </h3>
+          <h3 class="forecast-highLow"></h3>
+          <img class="forecastIcon" />
+        </div>
+        <div class="dailyForecast">
+          <h2 class="day"></h2>
+          <h3 class="forecast-conditions"></h3>
+          <h3 class="forecast-rain">
+            <img src="/weather-app/ef1af880bf3763354bc2.svg" /><span></span>
+          </h3>
+          <h3 class="forecast-highLow"></h3>
+          <img class="forecastIcon" />
+        </div>
+        <div class="dailyForecast">
+          <h2 class="day"></h2>
+          <h3 class="forecast-conditions"></h3>
+          <h3 class="forecast-rain">
+            <img src="/weather-app/ef1af880bf3763354bc2.svg" /><span></span>
+          </h3>
+          <h3 class="forecast-highLow"></h3>
+          <img class="forecastIcon" />
+        </div>
+        <div class="dailyForecast">
+          <h2 class="day"></h2>
+          <h3 class="forecast-conditions"></h3>
+          <h3 class="forecast-rain">
+            <img src="/weather-app/ef1af880bf3763354bc2.svg" /><span></span>
+          </h3>
+          <h3 class="forecast-highLow"></h3>
+          <img class="forecastIcon" />
+        </div>
+      </div>
+      <div id="tertiaryWeather" class="bubble">
+        <div id="assorted-weather">
+          <div id="wind">
+            <img src="/weather-app/f92dad324186ab69583c.svg" />
+            <span class="detailTitle">Wind</span>
+            <span class="weatherDetail"></span>
+          </div>
+          <div id="humidity">
+            <img src="/weather-app/61743018bba09a4b3356.svg" />
+            <span class="detailTitle">Humidity</span>
+            <span class="weatherDetail"></span>
+          </div>
+          <div id="uv">
+            <img src="/weather-app/41742d8f9bb1070afc2e.svg" />
+            <span class="detailTitle">UV</span>
+            <span class="weatherDetail"></span>
+          </div>
+          <div id="pressure">
+            <img src="/weather-app/46559d6a217b74f523be.svg" />
+            <span class="detailTitle">Pressure</span>
+            <span class="weatherDetail"></span>
+          </div>
+          <div id="dew">
+            <img src="/weather-app/f5e939188b91694a8edb.svg" />
+            <span class="detailTitle">Dew point</span>
+            <span class="weatherDetail"></span>
+          </div>
+        </div>
+        <div id="risesAndSets">
+          <div id="sunriseContainer">
+            <div class="img-cropper">
+              <img src="/weather-app/9f7dcdd152ef3bee3611.svg" />
+            </div>
+            <h4 id="sunrise"></h3>
+          </div>
+          <div id="sunsetContainer">
+            <div class="img-cropper">
+              <img src="/weather-app/85680a079341970f0601.svg" />
+            </div>
+           <h4 id="sunset"></h3>
+          </div>
+          <div id="moonriseContainer">
+            <div class="img-cropper">
+              <img src="/weather-app/34cd6aee47ee987bada6.svg" />
+            </div>
+            <h4 id="moonrise"></h3>
+          </div>
+          <div id="moonsetContainer">
+            <div class="img-cropper">
+              <img src="/weather-app/e5a353fb0634535dfda8.svg" />
+            </div>
+            <h4 id="moonset"></h3>
+          </div>
+        </div>
+      </div>
+      <div id="spinnerContainer">
+        <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+      </div>
+    </main>
+    <footer>
+      <button id="settings">
+        <img src="/weather-app/942ab870d1696e112c8d.svg" />
+      </button>
+    </footer>
+  </body>
+</html>
